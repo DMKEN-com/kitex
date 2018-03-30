@@ -2,7 +2,26 @@
     <string name="app_name">KiTeX</string>
 
     <string name="label_about">Über</string>
+    <string name="label_keyboard">KiTeX Tastatur</string>
+    <string name="title_activity_settings">Einstellungen</string>
 
     <string name="btn_settings">Einstellungen</string>
     <string name="btn_about">Über</string>
+    <string name="hint_test">Hier ausprobieren!</string>
+
+
+    <!-- Strings related to Settings -->
+
+    <!-- General settings -->
+    <string name="pref_header_general">Generell</string>
+
+    <string name="pref_keyboard_layout_title">Tastaturlayout</string>
+    <string-array name="pref_keyboard_layout_titles">
+        <item>Englisch (QWERTY)</item>
+        <item>Deutsch (QWERTZ)</item>
+    </string-array>
+    <string-array name="pref_keyboard_layout_values">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
 </resources>

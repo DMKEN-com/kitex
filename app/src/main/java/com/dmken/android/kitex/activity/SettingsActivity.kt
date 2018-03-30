@@ -61,7 +61,7 @@ class SettingsActivity : AppCompatPreferenceActivity() {
             addPreferencesFromResource(R.xml.pref_general)
             setHasOptionsMenu(true)
 
-            bindPreferenceSummaryToValue(findPreference("keyboard_layout"))
+            bindPreferenceSummaryToValue(findPreference("keyboard_view"))
         }
 
         override fun onOptionsItemSelected(item: MenuItem): Boolean {
