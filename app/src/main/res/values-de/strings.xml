@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">KiTeX</string>
+
+    <string name="label_about">Über</string>
+
+    <string name="btn_settings">Einstellungen</string>
+    <string name="btn_about">Über</string>
+</resources>
