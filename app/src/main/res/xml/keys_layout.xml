@@ -6,6 +6,7 @@
     android:keyTextColor="@color/colorAccent"
     android:keyWidth="10%p">
 
+    <!-- TODO: Internationalize -->
     <!--
         ß , ! / . ' # ; | #
         - : ( ) $ % ^ * + =

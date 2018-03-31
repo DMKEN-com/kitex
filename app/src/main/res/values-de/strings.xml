@@ -4,10 +4,17 @@
     <string name="label_about">Über</string>
     <string name="label_keyboard">KiTeX Tastatur</string>
     <string name="title_activity_settings">Einstellungen</string>
+    <string name="label_share">Formel Teilen</string>
 
     <string name="btn_settings">Einstellungen</string>
     <string name="btn_about">Über</string>
     <string name="hint_test">Hier ausprobieren!</string>
+
+    <string name="msg_compileCancelled">Die Kompilierung wurde abgebrochen.</string>
+    <string name="msg_compileStarted">Die Kompilierung wurde gestartet.</string>
+    <string name="msg_invalidEquation">Die eingegebene Formel ist ungültig!</string>
+    <string name="msg_serverError">Ein fataler Serverfehler ist aufgetreten!</string>
+    <string name="msg_commitContentNotSupported">Das Eingabefeld unterstützt keine Bilder.</string>
 
 
     <!-- Strings related to Settings -->
