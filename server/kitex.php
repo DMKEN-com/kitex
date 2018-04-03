@@ -1,5 +1,25 @@
 <?php
 
+function delete_rec ($path) {
+    if (is_dir($path) === true) {
+        $files = array_diff(scandir($path), array('.', '..'));
+
+        foreach ($files as $file) {
+            delete_rec(realpath($path) . '/' . $file);
+        }
+
+        return rmdir($path);
+    } else if (is_file($path) === true) {
+        return unlink($path);
+    }
+
+    return false;
+}
+
+
+
+
+
 // API:
 //   Method:  POST
 //   Body:    Contains LaTeX code to be compiled.
@@ -31,38 +51,46 @@ if (file_exists($tempdir)) {
 }
 mkdir($tempdir);
 
+register_shutdown_function(function () use ($tempdir) {
+    // Delete temporary directory.
+    delete_rec($tempdir);
+});
+
 $code = file_get_contents("php://input");
 
 $tex_file_basename = 'file';
 $tex_file_name = "$tex_file_basename.tex";
 $tex_file = "$tempdir/$tex_file_name";
 $pdf_file = "$tempdir/$tex_file_basename.pdf";
+$jpg_file = "$tempdir/$tex_file_basename.jpg";
 
 file_put_contents($tex_file, "% Generated file by KiTeX.
-\\documentclass{standalone}
+\\documentclass[border = {1pt 1pt 1pt 1pt}]{standalone}
 
 \\usepackage[T1]{fontenc}
 \\usepackage[utf8]{inputenc}
+
+\\usepackage{mathtools}
+\\usepackage{amssymb}
+\\usepackage{stmaryrd}
 
 \\begin{document}
     $code
 \\end{document}
 ");
 
-// TODO: Error handling.
-
 $latex_result = null;
 $latex_return_code = 0;
-exec("cd '$tempdir' && pdflatex -interaction errorstopmode -halt-on-error -file-line-error $tex_file_name", $latex_result, $latex_return_code);
+exec("cd '$tempdir' \\
+    && pdflatex -interaction errorstopmode -halt-on-error -file-line-error $tex_file_name \\
+    && convert -density 8192 $pdf_file -quality 100 $jpg_file \\
+    && convert $jpg_file -resize 512x $jpg_file", $latex_result, $latex_return_code);
 if ($latex_return_code !== 0) {
     http_response_code(400);
     exit;
 }
 
-header('Content-Type: application/pdf');
-echo file_get_contents($pdf_file);
-
-// Delete temporary directory.
-unlink($tempdir);
+header('Content-Type: application/jpg');
+echo file_get_contents($jpg_file);
 
 ?>
