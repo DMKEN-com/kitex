@@ -1,11 +1,10 @@
 package com.dmken.android.kitex.service
 
 import android.util.Log
+import com.dmken.android.kitex.preference.Preferences
 import okhttp3.*
 import java.io.IOException
 import java.io.InputStream
-import java.net.URLEncoder
-import java.util.logging.Logger
 
 class LatexService {
     companion object {
@@ -17,12 +16,12 @@ class LatexService {
 
     private val client = OkHttpClient.Builder().build()
 
-    fun retrieveEquation(code: String, callback: (LatexState, InputStream?) -> Unit) {
+    fun retrieveEquation(code: String, environment: Preferences.LatexEnvironment, callback: (LatexState, InputStream?) -> Unit) {
         // Thread: ?
 
         Log.d(TAG, "Rendering <$code>.")
 
-        client.newCall(makeRequest(code)).enqueue(object : Callback {
+        client.newCall(makeRequest(code, environment)).enqueue(object : Callback {
             // Thread: Web
 
             override fun onFailure(call: Call, ex: IOException?) {
@@ -66,11 +65,28 @@ class LatexService {
         return callback(LatexState.SUCCESSFUL, body.byteStream())
     }
 
-    private fun makeRequest(code: String): Request {
+    private fun makeRequest(code: String, environment: Preferences.LatexEnvironment): Request {
+        val body = makeBody(code, environment);
+
+        Log.d(TAG, "Sending <$body>.")
+
         return Request.Builder()
                 .url(BASE_URL)
-                .post(RequestBody.create(MediaType.parse("text/latex"), "\\begin{equation*} $code \\end{equation*}"))
+                .post(RequestBody.create(MediaType.parse("text/latex"), body))
                 .build()
+    }
+
+    private fun makeBody(code: String, environment: Preferences.LatexEnvironment): String {
+        // FIXME: This should be settings-aware.
+
+        return "$ $code $";
+
+        // when (environment) {
+        //     Preferences.LatexEnvironment.EQUATION -> return "\\begin{equation*} $code \\end{equation*}"
+        //     Preferences.LatexEnvironment.ALIGN -> return "\\begin{align*} $code \\end{align*}"
+        //     Preferences.LatexEnvironment.DOLLAR -> return "$ $code $"
+        //     Preferences.LatexEnvironment.BRACKETS -> return "\\[ $code \\]"
+        // }
     }
 
     enum class LatexState {

@@ -3,4 +3,9 @@
         android:fragment="com.dmken.android.kitex.activity.SettingsActivity$GeneralPreferenceFragment"
         android:icon="@drawable/ic_info_black_24dp"
         android:title="@string/pref_header_general" />
+
+    <header
+        android:fragment="com.dmken.android.kitex.activity.SettingsActivity$CompilationPreferenceFragment"
+        android:icon="@drawable/ic_sync_black_24dp"
+        android:title="@string/pref_header_compilation" />
 </preference-headers>

@@ -31,4 +31,21 @@
         <item>0</item>
         <item>1</item>
     </string-array>
+
+    <!-- Compilation settings -->
+    <string name="pref_header_compilation">Kompilierung</string>
+
+    <string name="pref_latex_environment_title">Umgebung</string>
+    <string-array name="pref_latex_environment_titles">
+        <item>Equation</item>
+        <item>Align</item>
+        <item>Dollar</item>
+        <item>Bracket</item>
+    </string-array>
+    <string-array name="pref_latex_environment_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
 </resources>

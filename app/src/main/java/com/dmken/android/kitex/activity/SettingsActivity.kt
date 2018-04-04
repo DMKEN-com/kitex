@@ -49,6 +49,7 @@ class SettingsActivity : AppCompatPreferenceActivity() {
     override fun isValidFragment(fragmentName: String): Boolean {
         return PreferenceFragment::class.java.name == fragmentName
                 || GeneralPreferenceFragment::class.java.name == fragmentName
+                || CompilationPreferenceFragment::class.java.name == fragmentName
     }
 
     private fun setupActionBar() {
@@ -63,6 +64,26 @@ class SettingsActivity : AppCompatPreferenceActivity() {
             setHasOptionsMenu(true)
 
             bindPreferenceSummaryToValue(findPreference(Preferences.PREF_KEYBOARD_LAYOUT))
+        }
+
+        override fun onOptionsItemSelected(item: MenuItem): Boolean {
+            val id = item.itemId
+            if (id == android.R.id.home) {
+                startActivity(Intent(activity, SettingsActivity::class.java))
+                return true
+            }
+            return super.onOptionsItemSelected(item)
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    class CompilationPreferenceFragment : PreferenceFragment() {
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            addPreferencesFromResource(R.xml.pref_compilation)
+            setHasOptionsMenu(true)
+
+            bindPreferenceSummaryToValue(findPreference(Preferences.PREF_LATEX_ENVIRONMENT))
         }
 
         override fun onOptionsItemSelected(item: MenuItem): Boolean {

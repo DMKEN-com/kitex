@@ -65,7 +65,7 @@ $pdf_file = "$tempdir/$tex_file_basename.pdf";
 $jpg_file = "$tempdir/$tex_file_basename.jpg";
 
 file_put_contents($tex_file, "% Generated file by KiTeX.
-\\documentclass[border = {1pt 1pt 1pt 1pt}]{standalone}
+\\documentclass[preview, border = {1pt 1pt 1pt 1pt}]{standalone}
 
 \\usepackage[T1]{fontenc}
 \\usepackage[utf8]{inputenc}

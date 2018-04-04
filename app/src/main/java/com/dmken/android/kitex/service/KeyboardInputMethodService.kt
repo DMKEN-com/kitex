@@ -21,6 +21,7 @@ import android.support.v13.view.inputmethod.InputContentInfoCompat
 import android.view.View
 import android.widget.Toast
 import com.dmken.android.kitex.R
+import com.dmken.android.kitex.preference.Preferences
 import java.io.InputStream
 import java.util.*
 
@@ -103,7 +104,7 @@ class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboard
 
         Toast.makeText(applicationContext, getString(R.string.msg_compileStarted), Toast.LENGTH_LONG).show()
 
-        LatexService().retrieveEquation(code, { state, bytes ->
+        LatexService().retrieveEquation(code, Preferences.getLatexEnvironment(applicationContext), { state, bytes ->
             // Thread: Web
 
             Handler(Looper.getMainLooper()).post {
