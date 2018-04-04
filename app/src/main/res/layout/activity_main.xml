@@ -30,7 +30,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSettings" />
 
-    <EditText
+    <com.dmken.android.kitex.component.CommitEditText
         android:id="@+id/editTextTest"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

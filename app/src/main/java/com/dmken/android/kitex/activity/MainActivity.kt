@@ -19,5 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         btnSettings.setOnClickListener { startActivity(Intent(this, SettingsActivity::class.java)) }
         btnAbout.setOnClickListener { startActivity(Intent(this, AboutActivity::class.java)) }
+
+        editTextTest.commitListener = imageViewTest::setImageURI
     }
 }

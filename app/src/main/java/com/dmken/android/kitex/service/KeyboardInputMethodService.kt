@@ -22,12 +22,12 @@ import android.view.View
 import android.widget.Toast
 import com.dmken.android.kitex.R
 import com.dmken.android.kitex.preference.Preferences
+import com.dmken.android.kitex.util.CommonConstants
 import java.io.InputStream
 import java.util.*
 
 class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboardActionListener {
     companion object {
-        val MIME_TYPE = "image/png"
         val MAX_HEIGHT = 512
         val MARGIN_RIGHTLEFT = 50
         val MARGIN_TOPBOTTOM = 100
@@ -126,7 +126,7 @@ class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboard
 
         val values = ContentValues()
         values.put(MediaStore.Images.Media.TITLE, name)
-        values.put(MediaStore.Images.Media.MIME_TYPE, MIME_TYPE)
+        values.put(MediaStore.Images.Media.MIME_TYPE, CommonConstants.IMAGE_MIME_TYPE)
         val uri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
         AsyncTask.execute {
             // Thread: Web
@@ -158,7 +158,7 @@ class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboard
                         flag = 0
                         grantUriPermission(currentInputEditorInfo.packageName, uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
                     }
-                    val info = InputContentInfoCompat(uri, ClipDescription(name, arrayOf(MIME_TYPE)), null)
+                    val info = InputContentInfoCompat(uri, ClipDescription(name, arrayOf(CommonConstants.IMAGE_MIME_TYPE)), null)
                     InputConnectionCompat.commitContent(currentInputConnection, currentInputEditorInfo, info, flag, null)
                 } else {
                     Toast.makeText(applicationContext, getText(R.string.msg_commitContentNotSupported), Toast.LENGTH_SHORT).show()
@@ -178,7 +178,7 @@ class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboard
         if (currentInputEditorInfo == null) {
             return false
         }
-        return EditorInfoCompat.getContentMimeTypes(currentInputEditorInfo).contains(MIME_TYPE)
+        return EditorInfoCompat.getContentMimeTypes(currentInputEditorInfo).contains(CommonConstants.IMAGE_MIME_TYPE)
     }
 
     // https://stackoverflow.com/a/28367226/4907452
