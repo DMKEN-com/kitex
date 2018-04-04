@@ -65,6 +65,14 @@ class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboard
     override fun onKey(code: Int, secondaryCodes: IntArray?) {
         // Thread: UI
 
+        val setCaps = { shouldCaps: Boolean ->
+            if (caps != shouldCaps) {
+                caps = shouldCaps
+                keyboard.setShifted(caps)
+                keyboardView.invalidateAllKeys()
+            }
+        }
+
         when {
             code == Keyboard.KEYCODE_DELETE -> currentInputConnection.deleteSurroundingText(1, 0)
             code == Keyboard.KEYCODE_DONE -> {
@@ -72,27 +80,38 @@ class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboard
                 currentInputConnection.performContextMenuAction(android.R.id.selectAll)
                 val text = (currentInputConnection.getSelectedText(0) ?: "").toString()
 
+                setCaps(false)
+
                 startCompile(text)
             }
-            code == Keyboard.KEYCODE_SHIFT -> {
-                caps = !caps
-                keyboard.setShifted(caps)
-                keyboardView.invalidateAllKeys()
-            }
+            code == Keyboard.KEYCODE_SHIFT -> setCaps(!caps)
             code < 0 -> throw IllegalStateException("Unknown code $code.")
             else -> {
+                var capsChanged: Boolean = false;
                 val char = code.toChar()
                 val text: String;
                 if (caps) {
                     when {
-                        char == 'ß' -> text = "SS"
-                        char.isLetter() -> text = char.toUpperCase().toString()
+                        char == 'ß' -> {
+                            text = "SS"
+
+                            capsChanged = true
+                        }
+                        char.isLetter() -> {
+                            text = char.toUpperCase().toString()
+
+                            capsChanged = true
+                        }
                         else -> text = char.toString()
                     }
                 } else {
                     text = char.toString()
                 }
                 currentInputConnection.commitText(text, text.length)
+
+                if (capsChanged) {
+                    setCaps(false)
+                }
             }
         }
     }
