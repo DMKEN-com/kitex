@@ -18,6 +18,7 @@ import android.text.TextUtils
 import android.view.MenuItem
 import android.support.v4.app.NavUtils
 import com.dmken.android.kitex.R
+import com.dmken.android.kitex.preference.Preferences
 
 class SettingsActivity : AppCompatPreferenceActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,7 +62,7 @@ class SettingsActivity : AppCompatPreferenceActivity() {
             addPreferencesFromResource(R.xml.pref_general)
             setHasOptionsMenu(true)
 
-            bindPreferenceSummaryToValue(findPreference("keyboard_view"))
+            bindPreferenceSummaryToValue(findPreference(Preferences.PREF_KEYBOARD_LAYOUT))
         }
 
         override fun onOptionsItemSelected(item: MenuItem): Boolean {

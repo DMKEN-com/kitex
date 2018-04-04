@@ -6,7 +6,7 @@ import java.security.Key
 
 class Preferences {
     companion object {
-        val PREF_KEYBOARD_LAYOUT = "keyboard_view"
+        val PREF_KEYBOARD_LAYOUT = "keyboard_layout"
         val PREF_KEYBOARD_LAYOUT_DEFAULT = 1;
 
         enum class KeyboardLayout(val id: Int) {
