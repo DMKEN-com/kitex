@@ -23,6 +23,10 @@ import java.util.*
 
 
 class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboardActionListener {
+    companion object {
+        val TAG = KeyboardInputMethodService::class.java.name
+    }
+
     private var caps = false
 
     private lateinit var keyboard: Keyboard;
@@ -99,8 +103,6 @@ class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboard
                         char == 'ß' -> {
                             text = "SS"
 
-                            Log.d("DEMO", "<${code.toChar()}> <${secondaryCodes!!.map { c -> c.toChar() }}>")
-
                             capsChanged = true
                         }
                         char.isLetter() -> {
@@ -129,6 +131,8 @@ class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboard
 
         Toast.makeText(this, getString(R.string.msg_compileStarted), Toast.LENGTH_LONG).show()
 
+        Log.d(TAG, "Starting compilation of <$code>.")
+
         LatexService().retrieveEquation(code, { state, bytes ->
             // Thread: Web
 
@@ -152,6 +156,8 @@ class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboard
 
         AsyncTask.execute {
             // Thread: Async
+
+            Log.d(TAG, "Saving equation with name <$name>.")
 
             val values = ContentValues()
             values.put(MediaStore.Images.Media.TITLE, name)
@@ -181,6 +187,8 @@ class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboard
                 }
 
                 if (isCommitContentSupported()) {
+                    Log.d(TAG, "Text edit supports content commit.")
+
                     val flag: Int;
                     if (Build.VERSION.SDK_INT >= 25) {
                         flag = InputConnectionCompat.INPUT_CONTENT_GRANT_READ_URI_PERMISSION
@@ -191,6 +199,8 @@ class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboard
                     val info = InputContentInfoCompat(uri, ClipDescription(name, arrayOf(CommonConstants.IMAGE_MIME_TYPE)), null)
                     InputConnectionCompat.commitContent(currentInputConnection, currentInputEditorInfo, info, flag, null)
                 } else {
+                    Log.d(TAG, "Text edit does not support content commit.")
+
                     Toast.makeText(applicationContext, getText(R.string.msg_commitContentNotSupported), Toast.LENGTH_SHORT).show()
 
                     val share = Intent(Intent.ACTION_SEND)

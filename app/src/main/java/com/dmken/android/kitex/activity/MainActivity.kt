@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AlertDialog
+import android.util.Log
 import android.view.View
 import com.dmken.android.kitex.R
 import com.dmken.android.kitex.util.PermissionUtil
@@ -14,6 +15,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     companion object {
+        val TAG = MainActivity::class.java.name
+
         val PERMISSION_REQUEST_STORAGE = 0x1197
     }
 
@@ -44,6 +47,8 @@ class MainActivity : AppCompatActivity() {
                     updateUIByPermissions()
                 } else {
                     // Permission denied --> app does not work.
+
+                    Log.d(TAG, "Permission denied.")
 
                     AlertDialog.Builder(this)
                             .setTitle(R.string.diag_permissionWarning_title)
