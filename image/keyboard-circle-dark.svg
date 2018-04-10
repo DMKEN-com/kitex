@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   data-name="Ebene 1"
+   viewBox="0 0 800 800"
+   id="svg3597"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="keyboard-circle-dark.svg">
+  <metadata
+     id="metadata3619">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1916"
+     inkscape:window-height="1041"
+     id="namedview3617"
+     showgrid="false"
+     inkscape:zoom="0.834386"
+     inkscape:cx="443.6935"
+     inkscape:cy="472.61582"
+     inkscape:window-x="0"
+     inkscape:window-y="18"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg3597"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:snap-bbox="true"
+     inkscape:snap-bbox-midpoints="true"
+     inkscape:bbox-paths="true"
+     inkscape:bbox-nodes="true"
+     inkscape:snap-bbox-edge-midpoints="true">
+    <sodipodi:guide
+       position="400.29435,469.80654"
+       orientation="1,0"
+       id="guide3346" />
+    <sodipodi:guide
+       position="692.72495,656.77037"
+       orientation="0,1"
+       id="guide3348" />
+  </sodipodi:namedview>
+  <defs
+     id="defs3599">
+    <clipPath
+       id="d">
+      <circle
+         cx="400"
+         cy="400"
+         r="400"
+         fill="none"
+         id="circle3602" />
+    </clipPath>
+    <linearGradient
+       id="c"
+       x1="454.35"
+       x2="164"
+       y1="345.65"
+       y2="636"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0"
+         id="stop3605" />
+      <stop
+         stop-opacity="0"
+         offset="1"
+         id="stop3607" />
+    </linearGradient>
+  </defs>
+  <circle
+     cx="400"
+     cy="400"
+     r="400"
+     fill="#1c8adb"
+     id="circle3609" />
+  <g
+     clip-path="url(#d)"
+     id="g3611"
+     transform="matrix(1.4699549,0,0,1.4699549,-187.98196,-192.17902)">
+    <path
+       d="m 592.56,281.42 -385.12,0 a 10.6,10.6 0 0 0 -10.6,10.6 l 0,215.97 a 10.6,10.6 0 0 0 10.6,10.6 l 385.12,0 a 10.6,10.6 0 0 0 10.6,-10.6 l 0,-215.97 a 10.6,10.6 0 0 0 -10.6,-10.6 z m -83.915,37.32 33.919,0 0,33.919 -33.919,0 z m 16.96,77.378 -33.92,0 0,-33.919 33.919,0 z m 16.96,9.54 0,33.919 -33.92,0 0,-33.92 z m -268.17,-9.54 0,-33.919 33.919,0 0,33.919 z m 7.42,9.54 0,33.919 -33.92,0 0,-33.92 z m 9.54,0 33.919,0 0,33.919 -33.92,0 z m 26.499,-9.54 0,-33.919 33.919,0 0,33.919 z m 16.96,9.54 33.919,0 0,33.919 -33.921,0 z m 26.499,-9.54 0,-33.919 33.917,0 0,33.919 z m 16.96,9.54 33.917,0 0,33.919 -33.92,0 z m 26.499,-9.54 0,-33.919 33.917,0 0,33.919 z m 16.96,9.54 33.919,0 0,33.919 -33.922,0 z m 26.499,-9.54 0,-33.919 33.919,0 0,33.919 z m 16.96,9.54 33.919,0 0,33.919 -33.922,0 z m 0,-86.918 33.919,0 0,33.919 -33.922,0 z m -43.459,0 33.919,0 0,33.919 -33.922,0 z m -43.459,0 33.917,0 0,33.919 -33.92,0 z m -43.459,0 33.919,0 0,33.919 -33.922,0 z m -43.459,0 33.919,0 0,33.919 -33.922,0 z m -43.459,0 33.916,0 0,33.919 -33.919,0 z m -16.96,43.459 33.919,0 0,33.919 -33.922,0 z m 33.919,120.84 -33.922,0 0,-33.92 33.919,0 z m 257.57,0 -248.04,0 0,-33.92 248.03,0 z m 43.459,0 -33.922,0 0,-33.92 33.919,0 z m 3.18,-86.918 -33.922,0 0,-33.92 33.919,0 z"
+       id="path3615"
+       inkscape:connector-curvature="0"
+       style="fill:#505050" />
+  </g>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:600px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#b3b3b3;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     x="200.48967"
+     y="554.77258"
+     id="text3340"
+     sodipodi:linespacing="125%"><tspan
+       sodipodi:role="line"
+       id="tspan3342"
+       x="200.48967"
+       y="554.77258">∑</tspan></text>
+</svg>
