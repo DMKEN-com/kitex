@@ -1,32 +1,24 @@
 package com.dmken.android.kitex.service
 
-import android.Manifest
 import android.content.*
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Canvas
-import android.graphics.Color
 import android.inputmethodservice.InputMethodService
 import android.inputmethodservice.Keyboard
 import android.inputmethodservice.KeyboardView
-import android.os.AsyncTask
-import android.os.Build
-import android.os.Handler
-import android.os.Looper
+import android.os.*
 import android.provider.MediaStore
 import android.support.v13.view.inputmethod.EditorInfoCompat
 import android.support.v13.view.inputmethod.InputConnectionCompat
 import android.support.v13.view.inputmethod.InputContentInfoCompat
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AlertDialog
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.dmken.android.kitex.R
-import com.dmken.android.kitex.activity.MainActivity
 import com.dmken.android.kitex.preference.Preferences
 import com.dmken.android.kitex.util.CommonConstants
 import com.dmken.android.kitex.util.PermissionUtil
+import java.io.File
+import java.io.FileOutputStream
 import java.io.InputStream
 import java.util.*
 
@@ -151,16 +143,19 @@ class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboard
     private fun finishedCompilation(code: String, bytes: InputStream) {
         // Thread: UI
 
-        val name = "equation-${Date()}"
+        val date = Date()
+        val name = "equation-${date.time}"
 
-        val values = ContentValues()
-        values.put(MediaStore.Images.Media.TITLE, name)
-        values.put(MediaStore.Images.Media.MIME_TYPE, CommonConstants.IMAGE_MIME_TYPE)
-        val uri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
         AsyncTask.execute {
-            // Thread: Web
+            // Thread: Async
 
-            contentResolver.openOutputStream(uri).use { out -> bytes.copyTo(out) }
+            val values = ContentValues()
+            values.put(MediaStore.Images.Media.TITLE, name)
+            values.put(MediaStore.Images.Media.MIME_TYPE, CommonConstants.IMAGE_MIME_TYPE)
+            values.put(MediaStore.Images.Media.DATE_ADDED, date.time)
+            values.put(MediaStore.Images.Media.DATE_TAKEN, date.time)
+            values.put(MediaStore.Images.Media.DATA, saveEquation(name, bytes))
+            val uri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
 
             Handler(Looper.getMainLooper()).post {
                 // Thread: UI
@@ -198,6 +193,8 @@ class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboard
     }
 
     private fun isCommitContentSupported(): Boolean {
+        // Thread: ?
+
         if (currentInputConnection == null) {
             return false
         }
@@ -207,25 +204,18 @@ class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboard
         return EditorInfoCompat.getContentMimeTypes(currentInputEditorInfo).contains(CommonConstants.IMAGE_MIME_TYPE)
     }
 
-    // https://stackoverflow.com/a/28367226/4907452
-    private fun resize(image: Bitmap, maxWidth: Int, maxHeight: Int): Bitmap {
-        if (maxHeight > 0 && maxWidth > 0) {
-            val width = image.width
-            val height = image.height
-            val ratioBitmap = width.toFloat() / height.toFloat()
-            val ratioMax = maxWidth.toFloat() / maxHeight.toFloat()
+    private fun saveEquation(name: String, bytes: InputStream): String {
+        // Thread: Async
 
-            var finalWidth = maxWidth
-            var finalHeight = maxHeight
-            if (ratioMax > ratioBitmap) {
-                finalWidth = (maxHeight.toFloat() * ratioBitmap).toInt()
-            } else {
-                finalHeight = (maxWidth.toFloat() / ratioBitmap).toInt()
-            }
-            return Bitmap.createScaledBitmap(image, finalWidth, finalHeight, true)
-        } else {
-            return image
+        val directory = File(Environment.getExternalStorageDirectory(), CommonConstants.IMAGE_DIRECTORY)
+        if (!directory.exists()) {
+            directory.mkdirs()
         }
+        val file = File(directory, "$name.${CommonConstants.IMAGE_FILE_ENDING}")
+        if (file.exists()) {
+            file.delete()
+        }
+        FileOutputStream(file).use { out -> bytes.copyTo(out) }
+        return file.absolutePath
     }
-
 }
