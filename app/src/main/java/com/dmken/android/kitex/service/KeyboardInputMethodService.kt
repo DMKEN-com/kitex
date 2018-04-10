@@ -21,6 +21,10 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
 import java.util.*
+import android.view.inputmethod.ExtractedTextRequest
+import android.view.inputmethod.InputConnection
+
+
 
 class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboardActionListener {
     companion object {
@@ -74,11 +78,17 @@ class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboard
         }
 
         when {
-            code == Keyboard.KEYCODE_DELETE -> currentInputConnection.deleteSurroundingText(1, 0)
+            code == Keyboard.KEYCODE_DELETE -> {
+                if (currentInputConnection.getSelectedText(0).isEmpty()) {
+                    currentInputConnection.deleteSurroundingText(1, 0)
+                } else {
+                    currentInputConnection.commitText("", 1)
+                }
+            }
             code == Keyboard.KEYCODE_DONE -> {
-                // TODO: Is there a better way to get ALL TEXT of the input connection?
+                // TODO: Is there a better way to get ALL text?
                 currentInputConnection.performContextMenuAction(android.R.id.selectAll)
-                val text = (currentInputConnection.getSelectedText(0) ?: "").toString()
+                val text = currentInputConnection.getSelectedText(0).toString()
 
                 setCaps(false)
 
@@ -163,7 +173,11 @@ class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboard
                 Toast.makeText(this, "The compilation was finished!", Toast.LENGTH_LONG).show()
 
                 when (Preferences.getCodeHandling(applicationContext)) {
-                    Preferences.CodeHandling.DISCARD -> currentInputConnection.commitText("", 1)
+                    Preferences.CodeHandling.DISCARD -> {
+                        // TODO: Is there a better way to delete ALL text?
+                        currentInputConnection.performContextMenuAction(android.R.id.selectAll)
+                        currentInputConnection.commitText("", 1)
+                    }
                     Preferences.CodeHandling.COPY_TO_CLIPBOARD -> {
                         val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                         clipboard.primaryClip = ClipData.newPlainText("latex-code", code)
