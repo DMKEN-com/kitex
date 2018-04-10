@@ -160,19 +160,7 @@ class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboard
         AsyncTask.execute {
             // Thread: Web
 
-            contentResolver.openOutputStream(uri).use { out ->
-                val bitmapOriginal = BitmapFactory.decodeStream(bytes)
-                val bitmapResized = resize(bitmapOriginal, bitmapOriginal.width, MAX_HEIGHT)
-                val bitmap = Bitmap.createBitmap(bitmapResized.width + MARGIN_RIGHTLEFT * 2, bitmapResized.height + MARGIN_TOPBOTTOM * 2, Bitmap.Config.RGB_565)
-                bitmap.eraseColor(Color.WHITE)
-                val canvas = Canvas(bitmap)
-                canvas.drawBitmap(bitmapResized, MARGIN_RIGHTLEFT.toFloat(), MARGIN_TOPBOTTOM.toFloat(), null)
-
-                bitmapResized.recycle()
-                bitmapOriginal.recycle()
-
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, out)
-            }
+            contentResolver.openOutputStream(uri).use { out -> bytes.copyTo(out) }
 
             Handler(Looper.getMainLooper()).post {
                 // Thread: UI
