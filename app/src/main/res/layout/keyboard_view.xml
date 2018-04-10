@@ -7,4 +7,4 @@
     android:background="@color/colorPrimary"
     android:keyBackground="@color/colorPrimaryDark"
     android:keyPreviewLayout="@layout/preview"
-    android:keyTextColor="@color/colorAccent" />
+    android:keyTextColor="@color/colorAccentWhite" />

@@ -11,7 +11,7 @@ class LatexService {
     companion object {
         private val TAG = LatexService::class.java.name
 
-        private const val SECRET_TOKEN = "dsoifhgsfzugsafi76t32oiuro872z308r0932urigsa8fdii8t3o872gfi7ewgafai8sg8632t8fzgsai8fh8fg32"
+        private const val SECRET_TOKEN = "SECRET_TOKEN" // TODO: To be changed.
         val BASE_URL = "https://www.dmken.com/kitex/?token=$SECRET_TOKEN"
     }
 
