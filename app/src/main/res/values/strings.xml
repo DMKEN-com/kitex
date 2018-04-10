@@ -23,9 +23,10 @@
     <string name="btn_permission_error">Error: Permission Denied</string>
     <string name="hint_test">Test it!</string>
 
-    <string name="msg_compileCancelled">The compilation was cancelled.</string>
-    <string name="msg_compileStarted">The compilation has been started.</string>
-    <string name="msg_invalidEquation">The given formula is invalid!</string>
+    <string name="msg_compileCancelled">Compilation was cancelled.</string>
+    <string name="msg_compileFinished">Compilation finished.</string>
+    <string name="msg_compileStarted">Compilation has been started.</string>
+    <string name="msg_invalidEquation">Given formula is invalid!</string>
     <string name="msg_serverError">A fatal server error occurred!</string>
     <string name="msg_commitContentNotSupported">The input field does not support images.</string>
 

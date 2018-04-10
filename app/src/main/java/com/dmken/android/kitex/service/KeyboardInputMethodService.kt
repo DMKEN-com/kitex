@@ -170,7 +170,7 @@ class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboard
             Handler(Looper.getMainLooper()).post {
                 // Thread: UI
 
-                Toast.makeText(this, "The compilation was finished!", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getText(R.string.msg_compileFinished), Toast.LENGTH_LONG).show()
 
                 when (Preferences.getCodeHandling(applicationContext)) {
                     Preferences.CodeHandling.DISCARD -> {

@@ -23,9 +23,10 @@
     <string name="btn_permission_error">Fehler: Rechte Verweigert</string>
     <string name="hint_test">Hier ausprobieren!</string>
 
-    <string name="msg_compileCancelled">Die Kompilierung wurde abgebrochen.</string>
-    <string name="msg_compileStarted">Die Kompilierung wurde gestartet.</string>
-    <string name="msg_invalidEquation">Die eingegebene Formel ist ungültig!</string>
+    <string name="msg_compileCancelled">Kompilierung wurde abgebrochen.</string>
+    <string name="msg_compileFinished">Kompilierung abgeschlossen.</string>
+    <string name="msg_compileStarted">Kompilierung wurde gestartet.</string>
+    <string name="msg_invalidEquation">Formel ist ungültig!</string>
     <string name="msg_serverError">Ein fataler Serverfehler ist aufgetreten!</string>
     <string name="msg_commitContentNotSupported">Das Eingabefeld unterstützt keine Bilder.</string>
 
