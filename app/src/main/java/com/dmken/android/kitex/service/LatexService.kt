@@ -5,16 +5,21 @@ import com.dmken.android.kitex.preference.Preferences
 import okhttp3.*
 import java.io.IOException
 import java.io.InputStream
+import java.util.concurrent.TimeUnit
 
 class LatexService {
     companion object {
-        private const val TAG = "LatexService"
+        private val TAG = LatexService::class.java.name
 
         private const val SECRET_TOKEN = "dsoifhgsfzugsafi76t32oiuro872z308r0932urigsa8fdii8t3o872gfi7ewgafai8sg8632t8fzgsai8fh8fg32"
         val BASE_URL = "https://www.dmken.com/kitex/?token=$SECRET_TOKEN"
     }
 
-    private val client = OkHttpClient.Builder().build()
+    private val client = OkHttpClient.Builder()
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(10, TimeUnit.SECONDS)
+            .writeTimeout(10, TimeUnit.SECONDS)
+            .build()
 
     fun retrieveEquation(code: String, environment: Preferences.LatexEnvironment, callback: (LatexState, InputStream?) -> Unit) {
         // Thread: ?

@@ -6,10 +6,10 @@ import android.preference.PreferenceManager
 class Preferences {
     companion object {
         val PREF_KEYBOARD_LAYOUT = "keyboard_layout"
-        val PREF_KEYBOARD_LAYOUT_DEFAULT = 1;
+        val PREF_KEYBOARD_LAYOUT_DEFAULT = 1
 
         val PREF_LATEX_ENVIRONMENT = "latex_environment"
-        val PREF_LATEX_ENVIRONMENT_DEFAULT = 1;
+        val PREF_LATEX_ENVIRONMENT_DEFAULT = 1
 
         // ~ Getter/Setter ~
 

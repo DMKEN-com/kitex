@@ -22,14 +22,19 @@
         </activity>
         <activity
             android:name=".activity.AboutActivity"
-            android:label="@string/label_about" />
+            android:label="@string/label_about"
+            android:parentActivityName=".activity.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity" />
+        </activity>
         <activity
             android:name=".activity.SettingsActivity"
             android:label="@string/title_activity_settings"
             android:parentActivityName=".activity.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.dmken.android.kitex.activity.MainActivity" />
+                android:value=".activity.MainActivity" />
         </activity>
 
         <service

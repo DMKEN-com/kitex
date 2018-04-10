@@ -1,5 +1,6 @@
 package com.dmken.android.kitex.service
 
+import android.Manifest
 import android.content.ClipDescription
 import android.content.ContentValues
 import android.content.Intent
@@ -18,11 +19,16 @@ import android.provider.MediaStore
 import android.support.v13.view.inputmethod.EditorInfoCompat
 import android.support.v13.view.inputmethod.InputConnectionCompat
 import android.support.v13.view.inputmethod.InputContentInfoCompat
+import android.support.v4.content.ContextCompat
+import android.support.v7.app.AlertDialog
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.dmken.android.kitex.R
+import com.dmken.android.kitex.activity.MainActivity
 import com.dmken.android.kitex.preference.Preferences
 import com.dmken.android.kitex.util.CommonConstants
+import com.dmken.android.kitex.util.PermissionUtil
 import java.io.InputStream
 import java.util.*
 
@@ -40,6 +46,10 @@ class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboard
 
     override fun onCreateInputView(): View {
         // Thread: UI
+
+        if (!PermissionUtil.arePermissionsGranted(this)) {
+            throw IllegalStateException("Permissions not granted!")
+        }
 
         keyboardView = layoutInflater.inflate(R.layout.keyboard_view, null) as KeyboardView
         keyboard = Keyboard(this, R.xml.keys_layout)
@@ -94,6 +104,8 @@ class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboard
                     when {
                         char == 'ß' -> {
                             text = "SS"
+
+                            Log.d("DEMO", "<${code.toChar()}> <${secondaryCodes!!.map { c -> c.toChar() }}>")
 
                             capsChanged = true
                         }

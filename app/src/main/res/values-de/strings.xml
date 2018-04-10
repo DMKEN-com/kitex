@@ -6,8 +6,21 @@
     <string name="title_activity_settings">Einstellungen</string>
     <string name="label_share">Formel Teilen</string>
 
+    <string name="diag_mediaPermission_title">Erklärung der Rechte</string>
+    <string name="diag_mediaPermission_msg">Das Recht um auf den externen Speicher zu schreiben ist obligatorisch zum Zwischenspeichern der kompilierten Formeln und um diese an das aktuelle Textfeld zu senden. Die Bilder werden in einem eigenen Order gespeichert. Es werden keine weiteren Daten gelesen.</string>
+    <string name="diag_mediaPermission_btn">OK</string>
+
+    <string name="diag_permissionWarning_title">Rechtewarnung</string>
+    <string name="diag_permissionWarning_msg">Das Schreiben auf die Speicherkarte wurde verweigert. Die App wird abstürzen, sobald die Tastatur ausgewählt wird.</string>
+    <string name="diag_permissionWarning_btn_askAgain">Erneut Fragen</string>
+    <string name="diag_permissionWarning_btn_later">Später</string>
+    <string name="diag_permissionWarning_btn_settings">Einstellungen</string>
+    <string name="diag_permissionWarning_btn_ignore">Ignorieren</string>
+
     <string name="btn_settings">Einstellungen</string>
+    <string name="btn_keyboardSettings">Tastatureinstellungen</string>
     <string name="btn_about">Über</string>
+    <string name="btn_permission_error">Fehler: Rechte Verweigert</string>
     <string name="hint_test">Hier ausprobieren!</string>
 
     <string name="msg_compileCancelled">Die Kompilierung wurde abgebrochen.</string>
