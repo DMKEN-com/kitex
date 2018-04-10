@@ -133,7 +133,7 @@ class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboard
 
         Toast.makeText(this, getString(R.string.msg_compileStarted), Toast.LENGTH_LONG).show()
 
-        LatexService().retrieveEquation(code, Preferences.getLatexEnvironment(applicationContext), { state, bytes ->
+        LatexService().retrieveEquation(code, { state, bytes ->
             // Thread: Web
 
             Handler(Looper.getMainLooper()).post {

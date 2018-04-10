@@ -21,12 +21,12 @@ class LatexService {
             .writeTimeout(10, TimeUnit.SECONDS)
             .build()
 
-    fun retrieveEquation(code: String, environment: Preferences.LatexEnvironment, callback: (LatexState, InputStream?) -> Unit) {
+    fun retrieveEquation(code: String, callback: (LatexState, InputStream?) -> Unit) {
         // Thread: ?
 
         Log.d(TAG, "Rendering <$code>.")
 
-        client.newCall(makeRequest(code, environment)).enqueue(object : Callback {
+        client.newCall(makeRequest(code)).enqueue(object : Callback {
             // Thread: Web
 
             override fun onFailure(call: Call, ex: IOException?) {
@@ -70,8 +70,8 @@ class LatexService {
         return callback(LatexState.SUCCESSFUL, body.byteStream())
     }
 
-    private fun makeRequest(code: String, environment: Preferences.LatexEnvironment): Request {
-        val body = makeBody(code, environment);
+    private fun makeRequest(code: String): Request {
+        val body = makeBody(code);
 
         Log.d(TAG, "Sending <$body>.")
 
@@ -81,17 +81,8 @@ class LatexService {
                 .build()
     }
 
-    private fun makeBody(code: String, environment: Preferences.LatexEnvironment): String {
-        // FIXME: This should be settings-aware.
-
-        return "$ $code $";
-
-        // when (environment) {
-        //     Preferences.LatexEnvironment.EQUATION -> return "\\begin{equation*} $code \\end{equation*}"
-        //     Preferences.LatexEnvironment.ALIGN -> return "\\begin{align*} $code \\end{align*}"
-        //     Preferences.LatexEnvironment.DOLLAR -> return "$ $code $"
-        //     Preferences.LatexEnvironment.BRACKETS -> return "\\[ $code \\]"
-        // }
+    private fun makeBody(code: String): String {
+        return "$ \\displaystyle $code $"
     }
 
     enum class LatexState {

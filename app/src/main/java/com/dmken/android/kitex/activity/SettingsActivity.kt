@@ -83,7 +83,7 @@ class SettingsActivity : AppCompatPreferenceActivity() {
             addPreferencesFromResource(R.xml.pref_compilation)
             setHasOptionsMenu(true)
 
-            bindPreferenceSummaryToValue(findPreference(Preferences.PREF_LATEX_ENVIRONMENT))
+            bindPreferenceSummaryToValue(findPreference(Preferences.PREF_COPY_TO_CLIPBOARD))
         }
 
         override fun onOptionsItemSelected(item: MenuItem): Boolean {

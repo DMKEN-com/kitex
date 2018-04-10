@@ -84,7 +84,7 @@ $latex_return_code = 0;
 exec("cd '$tempdir' \\
     && pdflatex -interaction errorstopmode -halt-on-error -file-line-error $tex_file_name \\
     && convert -density 8192 $pdf_file -quality 100 $jpg_file \\
-    && convert $jpg_file -resize 512x $jpg_file", $latex_result, $latex_return_code);
+    && convert $jpg_file -resize x256 $jpg_file", $latex_result, $latex_return_code);
 if ($latex_return_code !== 0) {
     http_response_code(400);
     exit;

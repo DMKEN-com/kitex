@@ -8,9 +8,6 @@ class Preferences {
         val PREF_KEYBOARD_LAYOUT = "keyboard_layout"
         val PREF_KEYBOARD_LAYOUT_DEFAULT = 1
 
-        val PREF_LATEX_ENVIRONMENT = "latex_environment"
-        val PREF_LATEX_ENVIRONMENT_DEFAULT = 1
-
         val PREF_COPY_TO_CLIPBOARD = "copy_to_clipboard"
         val PREF_COPY_TO_CLIPBOARD_DEFAULT = 0
 
@@ -21,12 +18,6 @@ class Preferences {
 
         fun setKeyboardLayout(context: Context, value: KeyboardLayout)
                 = setInt(context, PREF_KEYBOARD_LAYOUT, value.id)
-
-        fun getLatexEnvironment(context: Context): LatexEnvironment
-                = LatexEnvironment.byId(getInt(context, PREF_LATEX_ENVIRONMENT, PREF_LATEX_ENVIRONMENT_DEFAULT))
-
-        fun setLatexEnvironment(context: Context, value: LatexEnvironment)
-                = setInt(context, PREF_LATEX_ENVIRONMENT, value.id)
 
         fun getCodeHandling(context: Context): CodeHandling
                 = CodeHandling.byId(getInt(context, PREF_COPY_TO_CLIPBOARD, PREF_COPY_TO_CLIPBOARD_DEFAULT))
@@ -63,25 +54,6 @@ class Preferences {
                     }
                 }
                 throw IllegalArgumentException("Unknown layout id $id!");
-            }
-        }
-    }
-
-    enum class LatexEnvironment(val id: Int) {
-        EQUATION(0),
-        ALIGN(1),
-        DOLLAR(2),
-        BRACKETS(3);
-
-        companion object {
-            fun byId(id: Int): LatexEnvironment {
-                for (environment in values()) {
-                    if (environment.id == id) {
-                        return environment
-                    }
-                }
-
-                throw IllegalArgumentException("Unknown environment id $id!")
             }
         }
     }
