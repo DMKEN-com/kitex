@@ -186,6 +186,7 @@ class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboard
 
                     val share = Intent(Intent.ACTION_SEND)
                     share.putExtra(Intent.EXTRA_STREAM, uri)
+                    share.type = CommonConstants.IMAGE_MIME_TYPE
                     startActivity(Intent.createChooser(share, getText(R.string.label_share)))
                 }
             }
