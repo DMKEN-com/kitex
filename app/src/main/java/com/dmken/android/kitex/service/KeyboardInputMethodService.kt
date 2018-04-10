@@ -1,9 +1,7 @@
 package com.dmken.android.kitex.service
 
 import android.Manifest
-import android.content.ClipDescription
-import android.content.ContentValues
-import android.content.Intent
+import android.content.*
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
@@ -133,7 +131,7 @@ class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboard
     private fun startCompile(code: String) {
         // Thread: UI
 
-        Toast.makeText(applicationContext, getString(R.string.msg_compileStarted), Toast.LENGTH_LONG).show()
+        Toast.makeText(this, getString(R.string.msg_compileStarted), Toast.LENGTH_LONG).show()
 
         LatexService().retrieveEquation(code, Preferences.getLatexEnvironment(applicationContext), { state, bytes ->
             // Thread: Web
@@ -144,13 +142,13 @@ class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboard
                 when (state) {
                     LatexService.LatexState.INVALID_EQUATION -> Toast.makeText(applicationContext, getString(R.string.msg_invalidEquation), Toast.LENGTH_LONG).show()
                     LatexService.LatexState.SERVER_ERROR -> Toast.makeText(applicationContext, getString(R.string.msg_serverError), Toast.LENGTH_LONG).show()
-                    LatexService.LatexState.SUCCESSFUL -> finishedCompilation(bytes!!) // '!!' is safe here as SUCCESSFUL implies that bytes != null
+                    LatexService.LatexState.SUCCESSFUL -> finishedCompilation(code, bytes!!) // '!!' is safe here as SUCCESSFUL implies that bytes != null
                 }
             }
         })
     }
 
-    private fun finishedCompilation(bytes: InputStream) {
+    private fun finishedCompilation(code: String, bytes: InputStream) {
         // Thread: UI
 
         val name = "equation-${Date()}"
@@ -179,7 +177,16 @@ class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboard
             Handler(Looper.getMainLooper()).post {
                 // Thread: UI
 
-                Toast.makeText(applicationContext, "The compilation was finished!", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "The compilation was finished!", Toast.LENGTH_LONG).show()
+
+                when (Preferences.getCodeHandling(applicationContext)) {
+                    Preferences.CodeHandling.DISCARD -> currentInputConnection.commitText("", 1)
+                    Preferences.CodeHandling.COPY_TO_CLIPBOARD -> {
+                        val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                        clipboard.primaryClip = ClipData.newPlainText("latex-code", code)
+                    }
+                    Preferences.CodeHandling.DO_NOTHING -> { }
+                }
 
                 if (isCommitContentSupported()) {
                     val flag: Int;

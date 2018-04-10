@@ -11,6 +11,9 @@ class Preferences {
         val PREF_LATEX_ENVIRONMENT = "latex_environment"
         val PREF_LATEX_ENVIRONMENT_DEFAULT = 1
 
+        val PREF_COPY_TO_CLIPBOARD = "copy_to_clipboard"
+        val PREF_COPY_TO_CLIPBOARD_DEFAULT = 0
+
         // ~ Getter/Setter ~
 
         fun getKeyboardLayout(context: Context): KeyboardLayout
@@ -24,6 +27,12 @@ class Preferences {
 
         fun setLatexEnvironment(context: Context, value: LatexEnvironment)
                 = setInt(context, PREF_LATEX_ENVIRONMENT, value.id)
+
+        fun getCodeHandling(context: Context): CodeHandling
+                = CodeHandling.byId(getInt(context, PREF_COPY_TO_CLIPBOARD, PREF_COPY_TO_CLIPBOARD_DEFAULT))
+
+        fun setCodeHandling(context: Context, value: CodeHandling)
+                = setInt(context, PREF_COPY_TO_CLIPBOARD, value.id)
 
         // ~ Private Getter/Setter ~
 
@@ -73,6 +82,24 @@ class Preferences {
                 }
 
                 throw IllegalArgumentException("Unknown environment id $id!")
+            }
+        }
+    }
+
+    enum class CodeHandling(val id: Int) {
+        DO_NOTHING(0),
+        COPY_TO_CLIPBOARD(1),
+        DISCARD(2);
+
+        companion object {
+            fun byId(id: Int): CodeHandling {
+                for (handling in values()) {
+                    if (handling.id == id) {
+                        return handling
+                    }
+                }
+
+                throw IllegalArgumentException("Unknown handling id $id!")
             }
         }
     }

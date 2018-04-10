@@ -61,4 +61,16 @@
         <item>2</item>
         <item>3</item>
     </string-array>
+
+    <string name="pref_copy_to_clipboatd_title">Handling of Code after Compilation</string>
+    <string-array name="pref_copy_to_clipboard_titles">
+        <item>Do Nothing</item>
+        <item>Copy to Clipboard</item>
+        <item>Discard</item>
+    </string-array>
+    <string-array name="pref_copy_to_clipboard_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
 </resources>

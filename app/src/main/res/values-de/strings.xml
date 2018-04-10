@@ -61,4 +61,16 @@
         <item>2</item>
         <item>3</item>
     </string-array>
+
+    <string name="pref_copy_to_clipboatd_title">Umgang mit der Formel nach der Kompilierung</string>
+    <string-array name="pref_copy_to_clipboard_titles">
+        <item>Nichts tun</item>
+        <item>In die Zwischenablage kopieren</item>
+        <item>Löschen</item>
+    </string-array>
+    <string-array name="pref_copy_to_clipboard_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
 </resources>
