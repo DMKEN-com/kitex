@@ -29,6 +29,12 @@
     <string name="msg_serverError">A fatal server error occurred!</string>
     <string name="msg_commitContentNotSupported">The input field does not support images.</string>
 
+    <string name="about_title_license">License</string>
+    <string name="about_librariesSeeBelow">For libraries see below.</string>
+    <string name="about_title_libraries">Libraries</string>
+    <string name="about_libraries_licenses_apachev2">Apache License, Version 2.0</string>
+    <string name="about_libraries_okhttp">OkHttp</string>
+
 
     <!-- Strings related to Settings -->
 

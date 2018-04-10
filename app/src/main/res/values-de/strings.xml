@@ -29,6 +29,12 @@
     <string name="msg_serverError">Ein fataler Serverfehler ist aufgetreten!</string>
     <string name="msg_commitContentNotSupported">Das Eingabefeld unterstützt keine Bilder.</string>
 
+    <string name="about_title_license">Lizenz</string>
+    <string name="about_librariesSeeBelow">Bibliotheken siehe unten</string>
+    <string name="about_title_libraries">Bibliotheken</string>
+    <string name="about_libraries_licenses_apachev2">Apache License, Version 2.0</string>
+    <string name="about_libraries_okhttp">OkHttp</string>
+
 
     <!-- Strings related to Settings -->
 
