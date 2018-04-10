@@ -6,7 +6,8 @@
     android:keyTextColor="@color/colorAccent"
     android:keyWidth="10%p">
 
-    <!-- TODO: Internationalize -->
+    <!-- NOTE: Changes in this file must be reflected in file keys_layout_qwertz.xml! -->
+
     <!--
           @ $ % # " ' | !
         [ ] < > + - * / = ?
@@ -16,8 +17,6 @@
          a s d f g h j k l
         SH y x c v b n m BK
         ß , B_L_A_N_K . CMP
-
-        ß supports ß, ä, ö, ü
     -->
 
     <Row>
@@ -72,7 +71,7 @@
         <Key android:keyLabel="e" android:codes="101" />
         <Key android:keyLabel="r" android:codes="114" />
         <Key android:keyLabel="t" android:codes="116" />
-        <Key android:keyLabel="z" android:codes="122" />
+        <Key android:keyLabel="y" android:codes="121" />
         <Key android:keyLabel="u" android:codes="117" />
         <Key android:keyLabel="i" android:codes="105" />
         <Key android:keyLabel="o" android:codes="111" />
@@ -91,7 +90,7 @@
     </Row>
     <Row>
         <Key android:keyLabel="\u21e7" android:isSticky="true" android:codes="-1" android:keyWidth="15%p" android:keyEdgeFlags="left" /> <!-- TODO -->
-        <Key android:keyLabel="y" android:codes="121" />
+        <Key android:keyLabel="z" android:codes="122" />
         <Key android:keyLabel="x" android:codes="120" />
         <Key android:keyLabel="c" android:codes="99" />
         <Key android:keyLabel="v" android:codes="118" />

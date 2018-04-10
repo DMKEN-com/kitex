@@ -1,7 +1,6 @@
 package com.dmken.android.kitex.service
 
 import android.content.*
-import android.graphics.Bitmap
 import android.inputmethodservice.InputMethodService
 import android.inputmethodservice.Keyboard
 import android.inputmethodservice.KeyboardView
@@ -21,18 +20,9 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
 import java.util.*
-import android.view.inputmethod.ExtractedTextRequest
-import android.view.inputmethod.InputConnection
-
 
 
 class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboardActionListener {
-    companion object {
-        val MAX_HEIGHT = 512
-        val MARGIN_RIGHTLEFT = 50
-        val MARGIN_TOPBOTTOM = 100
-    }
-
     private var caps = false
 
     private lateinit var keyboard: Keyboard;
@@ -46,7 +36,11 @@ class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboard
         }
 
         keyboardView = layoutInflater.inflate(R.layout.keyboard_view, null) as KeyboardView
-        keyboard = Keyboard(this, R.xml.keys_layout)
+        val layoutId = when (Preferences.getKeyboardLayout(this)) {
+            Preferences.KeyboardLayout.GERMAN -> R.xml.keys_layout_qwertz
+            Preferences.KeyboardLayout.ENGLISH -> R.xml.keys_layout_querty
+        }
+        keyboard = Keyboard(this, layoutId)
 
         keyboardView.keyboard = keyboard
         keyboardView.setOnKeyboardActionListener(this)
@@ -79,7 +73,7 @@ class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboard
 
         when {
             code == Keyboard.KEYCODE_DELETE -> {
-                if (currentInputConnection.getSelectedText(0).isEmpty()) {
+                if ((currentInputConnection.getSelectedText(0) ?: "").isEmpty()) {
                     currentInputConnection.deleteSurroundingText(1, 0)
                 } else {
                     currentInputConnection.commitText("", 1)
@@ -88,7 +82,7 @@ class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboard
             code == Keyboard.KEYCODE_DONE -> {
                 // TODO: Is there a better way to get ALL text?
                 currentInputConnection.performContextMenuAction(android.R.id.selectAll)
-                val text = currentInputConnection.getSelectedText(0).toString()
+                val text = (currentInputConnection.getSelectedText(0) ?: "").toString()
 
                 setCaps(false)
 
@@ -182,7 +176,8 @@ class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboard
                         val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                         clipboard.primaryClip = ClipData.newPlainText("latex-code", code)
                     }
-                    Preferences.CodeHandling.DO_NOTHING -> { }
+                    Preferences.CodeHandling.DO_NOTHING -> {
+                    }
                 }
 
                 if (isCommitContentSupported()) {
