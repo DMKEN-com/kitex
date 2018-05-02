@@ -18,7 +18,7 @@
         ß , B_L_A_N_K . CMP
     -->
 
-    <Row>
+    <Row android:rowEdgeFlags="top">
         <Key android:keyLabel="\@" android:codes="64" android:horizontalGap="10%p" android:keyEdgeFlags="left" />
         <Key android:keyLabel="$" android:codes="36" />
         <Key android:keyLabel="%" android:codes="37" />

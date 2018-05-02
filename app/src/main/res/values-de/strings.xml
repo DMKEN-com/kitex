@@ -36,6 +36,10 @@
     <string name="about_libraries_licenses_apachev2">Apache License, Version 2.0</string>
     <string name="about_libraries_okhttp">OkHttp</string>
 
+    <string name="keylabel_permission_error">Rechte Verweigert</string>
+    <string name="keylabel_goto_settings">Einstellungen</string>
+    <string name="keylabel_refresh_info">Bitte nach Vergabe die Tastatur neu starten</string>
+
 
     <!-- Strings related to Settings -->
 

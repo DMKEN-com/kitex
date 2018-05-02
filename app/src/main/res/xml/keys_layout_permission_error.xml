@@ -1,0 +1,22 @@
+<Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
+    android:horizontalGap="1dp"
+    android:keyBackground="@color/colorPrimaryDark"
+    android:keyHeight="50dp"
+    android:keyWidth="45%p"
+    android:verticalGap="1dp">
+
+    <Row android:rowEdgeFlags="top">
+        <Key
+            android:keyEdgeFlags="left"
+            android:keyLabel="@string/keylabel_permission_error" />
+        <Key
+            android:horizontalGap="10%p"
+            android:keyEdgeFlags="right"
+            android:keyLabel="@string/keylabel_goto_settings" />
+    </Row>
+    <Row android:rowEdgeFlags="bottom">
+        <Key
+            android:keyWidth="100%p"
+            android:keyLabel="@string/keylabel_refresh_info" />
+    </Row>
+</Keyboard>

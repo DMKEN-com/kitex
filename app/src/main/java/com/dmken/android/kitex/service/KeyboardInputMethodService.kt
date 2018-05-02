@@ -9,10 +9,12 @@ import android.provider.MediaStore
 import android.support.v13.view.inputmethod.EditorInfoCompat
 import android.support.v13.view.inputmethod.InputConnectionCompat
 import android.support.v13.view.inputmethod.InputContentInfoCompat
+import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.dmken.android.kitex.R
+import com.dmken.android.kitex.activity.MainActivity
 import com.dmken.android.kitex.preference.Preferences
 import com.dmken.android.kitex.util.CommonConstants
 import com.dmken.android.kitex.util.PermissionUtil
@@ -24,7 +26,7 @@ import java.util.*
 
 class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboardActionListener {
     companion object {
-        val TAG = KeyboardInputMethodService::class.java.name
+        val TAG = KeyboardInputMethodService::class.java.name!!
     }
 
     private var caps = false
@@ -32,18 +34,22 @@ class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboard
     private lateinit var keyboard: Keyboard;
     private lateinit var keyboardView: KeyboardView
 
+    private var permissionsGranted = false
+
     override fun onCreateInputView(): View {
         // Thread: UI
 
-        if (!PermissionUtil.arePermissionsGranted(this)) {
-            throw IllegalStateException("Permissions not granted!")
-        }
-
         keyboardView = layoutInflater.inflate(R.layout.keyboard_view, null) as KeyboardView
-        val layoutId = when (Preferences.getKeyboardLayout(this)) {
-            Preferences.KeyboardLayout.GERMAN -> R.xml.keys_layout_qwertz
-            Preferences.KeyboardLayout.ENGLISH -> R.xml.keys_layout_querty
-        }
+        permissionsGranted = PermissionUtil.arePermissionsGranted(this)
+        val layoutId =
+                if (permissionsGranted) {
+                    when (Preferences.getKeyboardLayout(this)) {
+                        Preferences.KeyboardLayout.GERMAN -> R.xml.keys_layout_qwertz
+                        Preferences.KeyboardLayout.ENGLISH -> R.xml.keys_layout_querty
+                    }
+                } else {
+                    R.xml.keys_layout_permission_error
+                }
         keyboard = Keyboard(this, layoutId)
 
         keyboardView.keyboard = keyboard
@@ -66,6 +72,11 @@ class KeyboardInputMethodService : InputMethodService(), KeyboardView.OnKeyboard
 
     override fun onKey(code: Int, secondaryCodes: IntArray?) {
         // Thread: UI
+
+        if (!permissionsGranted) {
+            ContextCompat.startActivity(this, Intent(this, MainActivity::class.java), null)
+            return
+        }
 
         val setCaps = { shouldCaps: Boolean ->
             if (caps != shouldCaps) {
