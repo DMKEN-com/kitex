@@ -10,9 +10,9 @@ android {
         applicationId "com.dmken.android.kitex"
         minSdkVersion 16
         targetSdkVersion 27
-        // 01.00.01
-        versionCode 10001
-        versionName "1.0.1"
+        // 01.00.02
+        versionCode 10002
+        versionName "1.0.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
